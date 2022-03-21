@@ -3,19 +3,26 @@ extends Node
 onready var SM = get_parent()
 onready var player = get_node("../..")
 onready var attack = load("res://Attack.tscn")
+var inAttack = false
 
 
 func _ready():
 	yield(player, "ready")
 	
 func start():
-	player.position = Vector2(200,200)
-	print("e")
-
+	player.set_animation("Attacking")
+	player.set_animation("Sword")
+	
 func physics_process(_delta):
-	print("e")
-	if Input.is_action_pressed("attack"):
-		print("e")
-		SM.set_state("Attacking")
-		var attacking = attack.instance()
-		attacking.position = player.position
+	if not inAttack:
+		player.attack = attack.instance()
+		player.add_child(player.attack)
+		$Timer.start()
+		inAttack = true
+		player.attack.flip()
+
+
+func _on_Timer_timeout():
+	SM.set_state("Moving")
+	player.remove_child(player.attack)
+	inAttack = false

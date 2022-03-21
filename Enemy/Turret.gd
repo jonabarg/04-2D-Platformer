@@ -52,5 +52,20 @@ func set_mode(m):
 	else:		
 		$Cannon.modulate = Color(1,1,1,1)
 
+func _on_Area2D_body_entered(body):
+	print(body.name + "/CollisionShape2D")
+	get_node_or_null("/root/Game/Player_Container/Player")
+	if body.name == 'Player':
+		body.die()
+		queue_free()
+	if body.name == 'Attack':
+		queue_free()
+
+
 func _on_Search_Time_timeout():
 	found = true
+
+
+func _on_Area2D_body_shape_entered(body_id, body, body_shape, area_shape):
+	if body.name == 'Attack':
+		queue_free()

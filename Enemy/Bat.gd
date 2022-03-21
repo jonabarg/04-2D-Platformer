@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var player = null
 onready var ray = $RayCast2D
-export var speed = 350
+export var speed = 100
 export var looking_speed = 25
 var line_of_sight = false
 
@@ -13,7 +13,7 @@ var points = []
 const margin = 1.5
 
 func _ready():
-	position = Vector2(2000,100)
+	position = Vector2(500,100)
 
 func _physics_process(_delta):
 	var velocity = Vector2.ZERO
@@ -54,4 +54,6 @@ func _on_Area2D_body_entered(body):
 	get_node_or_null("/root/Game/Player_Container/Player")
 	if body.name == 'Player':
 		body.die()
+		queue_free()
+	if body.name == 'Attack':
 		queue_free()

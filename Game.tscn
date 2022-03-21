@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Camera.gd" type="Script" id=2]
 [ext_resource path="res://Enemy/Bat.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemy/Turret.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game.gd" type="Script" id=5]
 [ext_resource path="res://StateMachine/Player_Container.gd" type="Script" id=12]
 
 [sub_resource type="NavigationPolygon" id=1]
@@ -46,9 +48,13 @@ polygons = [ PoolIntArray( 0, 1, 2 ), PoolIntArray( 3, 4, 5, 6 ), PoolIntArray( 
 outlines = [ PoolVector2Array( 3710, 574, 3011, 573, 3011, 511, 2948, 510, 2948, 447, 2886, 442, 2885, 376, 2812, 374, 2812, 440, 2744, 443, 2747, 504, 2678, 505, 2682, 566, 1990, 568, 1993, 504, 1847, 502, 1849, 565, 1481, 568, 1483, 504, 1418, 500, 1413, 441, 1358, 436, 1357, 367, 1206, 365, 1210, 439, 1147, 435, 1145, 499, 1081, 499, 1081, 564, 75, 566, 72, -628, 3702, -628 ) ]
 
 [node name="Game" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="Bat" parent="." instance=ExtResource( 3 )]
-position = Vector2( 964, 198 )
+position = Vector2( 500, 198 )
+
+[node name="Turret" parent="." instance=ExtResource( 4 )]
+position = Vector2( 932.119, -69.6848 )
 
 [node name="Player_Container" type="Node2D" parent="."]
 script = ExtResource( 12 )
@@ -79,4 +85,5 @@ script = ExtResource( 2 )
 position = Vector2( -10, 4 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+position = Vector2( 3.56372, 5.3454 )
 navpoly = SubResource( 5 )

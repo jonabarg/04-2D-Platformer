@@ -5,6 +5,7 @@ onready var SM = $StateMachine
 var velocity = Vector2.ZERO
 var jump_power = Vector2.ZERO
 var direction = 1
+var attack
 
 export var gravity = Vector2(0,30)
 
@@ -24,6 +25,11 @@ var should_direction_flip = true # wether or not player controls (left/right) ca
 
 
 func _physics_process(_delta):
+	
+	if Input.is_action_just_pressed("attack") and not double_jumped:
+		double_jumped = true
+		SM.set_state("Attacking")
+		
 	velocity.x = clamp(velocity.x,-max_move,max_move)
 		
 	if should_direction_flip:
@@ -33,6 +39,9 @@ func _physics_process(_delta):
 	if is_on_floor():
 		double_jumped = false
 		set_wall_raycasts(true)
+		
+	if self.position.y > Global.death_zone:
+		die()
 
 func is_moving():
 	if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
@@ -82,3 +91,4 @@ func set_wall_raycasts(is_enabled):
 
 func die():
 	queue_free()
+
