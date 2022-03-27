@@ -18,6 +18,7 @@ radius = 20.0116
 script = ExtResource( 2 )
 
 [node name="State" type="Label" parent="."]
+visible = false
 margin_left = -50.0
 margin_top = -60.0
 margin_right = 50.0
@@ -30,6 +31,7 @@ __meta__ = {
 }
 
 [node name="Laser" type="Line2D" parent="."]
+visible = false
 points = PoolVector2Array( 0, 0, -25, 0 )
 width = 1.0
 default_color = Color( 0.941176, 0.243137, 0.243137, 1 )
@@ -70,5 +72,6 @@ script = ExtResource( 7 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0.132431, 0.132435 )
 shape = SubResource( 2 )
+
 [connection signal="timeout" from="Search_Time" to="." method="_on_Search_Time_timeout"]
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_Area2D_body_shape_entered"]

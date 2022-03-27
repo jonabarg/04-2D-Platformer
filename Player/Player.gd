@@ -90,5 +90,6 @@ func set_wall_raycasts(is_enabled):
 	$Wall/Right.enabled = is_enabled
 
 func die():
-	queue_free()
+	Global.lives -= 1
+	get_parent().remove_child(self)
 

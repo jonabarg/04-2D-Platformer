@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var player = null
 onready var ray = $RayCast2D
-export var speed = 100
+export var speed = 200
 export var looking_speed = 25
 var line_of_sight = false
 
@@ -12,8 +12,8 @@ export var los_color = Color(0.988,0.753,0.455,0.5)
 var points = []
 const margin = 1.5
 
-func _ready():
-	position = Vector2(500,100)
+#func _ready():
+	#position = Vector2(500,100)
 
 func _physics_process(_delta):
 	var velocity = Vector2.ZERO
@@ -38,15 +38,7 @@ func _physics_process(_delta):
 			move_and_slide(velocity, Vector2(0,0))
 		update()
 
-func _draw():
-	var c = looking_color
-	if line_of_sight:
-		c = los_color
-	if points.size() > 1:
-		var prev_point = get_global_position()
-		for p in points:
-			draw_line(p - get_global_position(), prev_point - get_global_position(), c, 2)
-			prev_point = p
+
 
 
 func _on_Area2D_body_entered(body):

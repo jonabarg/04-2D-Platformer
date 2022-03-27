@@ -41,9 +41,10 @@ func set_ray_angle(ang):
 func update_laser(target,shooting):
 	$Laser.points[1] = target
 	if shooting:
+		$Laser.show()
 		$Laser.default_color = Color8(224,49,49)
 	else:
-		$Laser.default_color = Color8(169, 227, 75)
+		$Laser.hide()
 		
 
 func set_mode(m):

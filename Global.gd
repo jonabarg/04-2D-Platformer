@@ -2,9 +2,22 @@ extends Node
 
 var death_zone = 1000
 
+var jewels = 0
+
+var lives = 10
+
+var GameOver = false
+
+var GameOverText
+
+var scoreText
+
+var playText = "Play"
+
 func _unhandled_input(event):
 	if event.is_action_pressed("quit"):
-		get_tree().quit()
+		playText = "Continue"
+		var _target = get_tree().change_scene("res://Game.tscn")
 
 
 var fade = null
@@ -14,35 +27,8 @@ var fade_in = true
 var fade_out = ""
 
 func _physics_process(_delta):
-	if fade == null:
-		fade = get_node_or_null("/root/Game/Camera/Fade")
-	if fade_out != "":
-		execute_fade_out(fade_out)
-	if fade_in:
-		execute_fade_in()
-		
-
-func start_fade_in():
-	if fade != null:
-		fade.visible = true
-		fade.color.a = 1
-		fade_in = true
-
-func start_fade_out(target):
-	if fade != null:
-		fade.color.a = 0
-		fade.visible = true
-		fade_out = target
-
-func execute_fade_in():
-	if fade != null:
-		fade.color.a -= fade_speed
-		if fade.color.a <= 0:
-			fade_in = false
-
-func execute_fade_out(target):
-	if fade != null:
-		fade.color.a += fade_speed
-		if fade.color.a >= 1:
-			fade_out = ""
+	if lives < 1 and not GameOver:
+		GameOver = true
+		GameOverText = "You Died!"
+		var _target = get_tree().change_scene("res://Levels/Game_Over.tscn")
 			

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Thruster-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Levels/Game_Over.gd" type="Script" id=2]
+[ext_resource path="res://Levels/Camera.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -19,21 +20,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Camera" parent="." instance=ExtResource( 3 )]
+
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -44.0
-margin_top = -26.0
-margin_right = 1052.0
-margin_bottom = 642.0
+margin_left = -170.0
+margin_top = -140.0
+margin_right = 1470.0
+margin_bottom = 891.0
 color = Color( 0.203922, 0.227451, 0.25098, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
 margin_right = 1024.0
 margin_bottom = 246.0
 custom_fonts/font = SubResource( 1 )
-text = "Congratulations! 
-You win!"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Play_Again" type="Button" parent="."]
 margin_left = 412.0
@@ -57,5 +64,6 @@ focus_neighbour_top = NodePath("../Play_Again")
 focus_previous = NodePath("../Play_Again")
 custom_fonts/font = SubResource( 2 )
 text = "Quit"
+
 [connection signal="pressed" from="Play_Again" to="." method="_on_Play_Again_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

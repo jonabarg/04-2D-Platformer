@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/portal_start.png" type="Texture" id=1]
 [ext_resource path="res://StateMachine/Player_Container.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Levels/Camera.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Levels/Spawn.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Tiles.png" type="Texture" id=7]
+[ext_resource path="res://Levels/Jewel.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Enemy/Bat.tscn" type="PackedScene" id=9]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Tiles.png 0"
@@ -452,6 +454,11 @@ points = PoolVector2Array( 64, 64, 0, 64, 32, 32, 64, 0 )
 5/shapes = [  ]
 5/z_index = 0
 
+[sub_resource type="NavigationPolygon" id=17]
+vertices = PoolVector2Array( 3201, 255, 3902, -190, 3457, 320, 3329, 320, 3200, 285, 2945, 305, 3072, 284, 3135, 320, 2305, 446, 3778, 627, 3901, 701, -128, 703, 3520, 624, 3777, 576, 3520, 576, 3457, 345, 1345, 284, 1345, 256, 2370, 253, 2240, 382, 1792, 383, 1664, 383, 3391, 386, 1665, 411, 1792, 431, 1600, 448, 1537, 383, 1279, 319, 2943, 253, 3072, 256, 2369, 385, 2367, 304, 2305, 384, 835, 285, 835, 255, 959, 284, 1026, 323, 960, 255, -126, -191, 2241, 430, 2241, 448, 1537, 412, 640, 384, 640, 318, 768, 323, 1090, 284, 1216, 256, 1216, 283, 1089, 253, 3327, 345, 703, 253, 128, 317, 703, 285, 194, 385, 126, 346 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 5, 6, 7, 8 ), PoolIntArray( 9, 10, 11, 12 ), PoolIntArray( 1, 13, 14, 15, 2 ), PoolIntArray( 16, 17, 18, 19, 20, 21 ), PoolIntArray( 1, 10, 9, 13 ), PoolIntArray( 22, 15, 14 ), PoolIntArray( 23, 20, 24, 25 ), PoolIntArray( 20, 23, 21 ), PoolIntArray( 16, 21, 26, 27 ), PoolIntArray( 6, 5, 28, 29 ), PoolIntArray( 30, 31, 5 ), PoolIntArray( 8, 32, 30 ), PoolIntArray( 33, 34, 35, 36 ), PoolIntArray( 37, 35, 34, 38 ), PoolIntArray( 24, 39, 40, 11, 25 ), PoolIntArray( 26, 41, 42, 43, 44 ), PoolIntArray( 45, 46, 47, 36 ), PoolIntArray( 46, 45, 48 ), PoolIntArray( 49, 22, 14, 12, 11, 8 ), PoolIntArray( 4, 3, 49, 7 ), PoolIntArray( 38, 1, 0, 29, 28 ), PoolIntArray( 38, 28, 18 ), PoolIntArray( 38, 18, 17, 46, 48 ), PoolIntArray( 38, 48, 37 ), PoolIntArray( 38, 34, 50 ), PoolIntArray( 51, 38, 50, 52, 43 ), PoolIntArray( 8, 30, 5 ), PoolIntArray( 36, 47, 27 ), PoolIntArray( 44, 33, 36 ), PoolIntArray( 42, 41, 25, 11, 53 ), PoolIntArray( 8, 7, 49 ), PoolIntArray( 40, 8, 11 ), PoolIntArray( 54, 53, 11 ), PoolIntArray( 54, 11, 38, 51 ), PoolIntArray( 43, 52, 44 ), PoolIntArray( 26, 44, 36 ), PoolIntArray( 26, 36, 27 ) ]
+outlines = [ PoolVector2Array( -128, 703, -126, -191, 3902, -190, 3901, 701 ), PoolVector2Array( 126, 346, 194, 385, 640, 384, 640, 318, 128, 317 ), PoolVector2Array( 703, 285, 768, 323, 835, 285, 835, 255, 703, 253 ), PoolVector2Array( 959, 284, 960, 255, 1089, 253, 1090, 284, 1026, 323 ), PoolVector2Array( 1216, 283, 1279, 319, 1345, 284, 1345, 256, 1216, 256 ), PoolVector2Array( 1537, 412, 1600, 448, 1665, 411, 1664, 383, 1537, 383 ), PoolVector2Array( 1792, 431, 1792, 383, 2240, 382, 2370, 253, 2943, 253, 2945, 305, 2367, 304, 2369, 385, 2305, 384, 2305, 446, 2241, 448, 2241, 430 ), PoolVector2Array( 3072, 284, 3135, 320, 3200, 285, 3201, 255, 3072, 256 ), PoolVector2Array( 3327, 345, 3329, 320, 3457, 320, 3457, 345, 3391, 386 ), PoolVector2Array( 3520, 624, 3520, 576, 3777, 576, 3778, 627 ) ]
+
 [node name="Game" type="Node2D"]
 
 [node name="Background" type="TileMap" parent="."]
@@ -512,4 +519,22 @@ tile_data = PoolIntArray( 196620, 3, 0, 196623, 4, 0, 262146, 0, 0, 262153, 1, 0
 
 [node name="Camera" parent="." instance=ExtResource( 5 )]
 process_mode = 0
+
+[node name="Jewel" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1593, 221 )
+
+[node name="Jewel2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 3664, 86 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+navpoly = SubResource( 17 )
+
+[node name="Bat" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1944, 632 )
+
+[node name="Bat2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 2979, 549 )
+
 [connection signal="body_entered" from="Exit_to_4" to="Exit_to_4" method="_on_Exit_body_entered"]
