@@ -8,24 +8,34 @@ var current_position = Vector2(200,200)
 
 var GameOver = false
 var GameOverText
-var scoreText
 var playText = "Play"
 var saveState = [null, null, null, null]
+var menu = true
 
-const SAVE_PATH = "user://savegame.sav"
-const SECRET = "C220 Is the Best!"
+const SAVE_PATH = "user://jonabarg_savegame.sav"
+const SECRET = "Venator"
 var save_file = ConfigFile.new()
-var Jewel = get_node_or_null("res://Levels/Jewel.tscn")
+var ogJewelPositions
+var jewelPositions
 var current_level = "Level1.tscn"
+var levelNum = 1
 
-#func _ready():
-	#load_saves()
+func _ready():
+	load_saves()
+	#var JewelContainer = get_node_or_null("/root/Game.gd")
+	#print(JewelContainer == null)
+	#var jewelPositions = get_node_or_null("/root/Game/JewelContainer.gd").giveJewels()
 
 
-func a_unhandled_input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("quit"):
-		playText = "Continue"
-		var _target = get_tree().change_scene("res://Game.tscn")
+		if not menu:
+			playText = "Continue"
+			var _target = get_tree().change_scene("res://Game.tscn")
+			menu = true
+		else:
+			var _target = get_tree().change_scene("res://Levels/" + str(current_level))
+			menu = false
 
 
 var fade = null
@@ -48,6 +58,7 @@ var save_data = {
 			,"saveState": null
 			,"level": get_node_or_null("res://Levels/Level1.tscn")
 			,"position": Vector2(200,200)
+			,"jewelPositions": ogJewelPositions
 		},
 		"save1": {
 			"lives": null
@@ -55,6 +66,7 @@ var save_data = {
 			,"saveState": null
 			,"level": get_node_or_null("res://Levels/Level1.tscn")
 			,"position": Vector2(200,200)
+			,"jewelPositions": ogJewelPositions
 		},
 		"save2": {
 			"lives": null
@@ -62,6 +74,7 @@ var save_data = {
 			,"saveState": null
 			,"level": get_node_or_null("res://Levels/Level1.tscn")
 			,"position": Vector2(200,200)
+			,"jewelPositions": ogJewelPositions
 		},
 		"save3": {
 			"lives": null
@@ -69,6 +82,7 @@ var save_data = {
 			,"saveState": null
 			,"level": get_node_or_null("res://Levels/Level1.tscn")
 			,"position": Vector2(200,200)
+			,"jewelPositions": ogJewelPositions
 		}
 	}
 }
@@ -80,6 +94,7 @@ func save_game(save):
 		,"saveState": saveState[save]
 		,"level": current_level
 		,"position": var2str(current_position)
+		,"jewelPositions": var2str(jewelPositions)
 	}
 
 	var save_game = File.new()
@@ -105,6 +120,7 @@ func load_saves():
 	saveState[3] = save_data["saves"]["save" + str(3)]["saveState"]
 	
 func load_game(save):
+	menu = false
 	var save_game = File.new()	
 	if not save_game.file_exists(SAVE_PATH):
 		return null
@@ -121,12 +137,19 @@ func load_game(save):
 	jewels = save_data["saves"]["save" + str(save)]["jewels"]
 	saveState[save] = save_data["saves"]["save" + str(save)]["saveState"]
 	current_position = str2var(save_data["saves"]["save" + str(save)]["position"])
+	jewelPositions = str2var(save_data["saves"]["save" + str(save)]["jewelPositions"])
 	var level = save_data["saves"]["save" + str(save)]["level"]
 	if save != 0:
 		current_level = level
 		var _scene = get_tree().change_scene("res://Levels/" + str(level))
+		
 	#call_deferred("restart_level")
 	
 func delete_save(save):
 	save_data["saves"]["save" + str(save)] = save_data["saves"]["save0"]
 	saveState[save] = null
+
+	var save_game = File.new()
+	save_game.open_encrypted_with_pass(SAVE_PATH, File.WRITE, SECRET)	
+	save_game.store_string(to_json(save_data))
+	save_game.close()

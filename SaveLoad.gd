@@ -27,15 +27,20 @@ func _ready():
 		$Slot3.hint_tooltip = Global.saveState[3]
 		$Save3.disabled = false
 		$Delete3.disabled = false
+	
 
-
+func getInfo():
+	var time = OS.get_time()
+	var time_return = String(time.hour) +":"+String(time.minute)+":"+String(time.second)
+	return "Data Saved at " + time_return + ": \n-Level " + str(Global.levelNum) + "\n   Jewels: " + str(Global.jewels) + "\n   Lives: " + str(Global.lives)
+	
 func _on_Back_pressed():
 	var _target = get_tree().change_scene("res://Game.tscn")
 
 
 func _on_Slot1_pressed():
 	if Global.saveState[1] == null:
-		Global.saveState[1] = "Data Saved"
+		Global.saveState[1] = getInfo()
 		Global.save_game(1)
 	else:
 		Global.load_game(1)
@@ -44,7 +49,7 @@ func _on_Slot1_pressed():
 
 func _on_Slot2_pressed():
 	if Global.saveState[2] == null:
-		Global.saveState[2] = "Data Saved"
+		Global.saveState[2] = getInfo()
 		Global.save_game(2)
 	else:
 		Global.load_game(2)
@@ -53,7 +58,7 @@ func _on_Slot2_pressed():
 
 func _on_Slot3_pressed():
 	if Global.saveState[3] == null:
-		Global.saveState[3] = "Data Saved"
+		Global.saveState[3] = getInfo()
 		Global.save_game(3)
 	else:
 		Global.load_game(3)
@@ -61,19 +66,19 @@ func _on_Slot3_pressed():
 
 
 func _on_Save1_pressed():
-	Global.saveState[1] = "Data Saved"
+	Global.saveState[1] = getInfo()
 	Global.save_game(1)
 	_ready()
 
 
 func _on_Save2_pressed():
-	Global.saveState[2] = "Data Saved"
+	Global.saveState[2] = getInfo()
 	Global.save_game(2)
 	_ready()
 
 
 func _on_Save3_pressed():
-	Global.saveState[3] = "Data Saved"
+	Global.saveState[3] = getInfo()
 	Global.save_game(3)
 	_ready()
 

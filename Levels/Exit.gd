@@ -7,16 +7,21 @@ func _on_Exit_body_entered(body):
 		body.position = Global.current_position
 		if name == "Exit_to_2":
 			Global.current_level = "Level2.tscn"
+			Global.levelNum = 2
 			var _target = get_tree().change_scene("res://Levels/Level2.tscn")
 		if name == "Exit_to_3":
 			Global.current_level = "Level3.tscn"
+			Global.levelNum = 3
 			var _target = get_tree().change_scene("res://Levels/Level3.tscn")
 		if name == "Exit_to_4":
 			Global.current_level = "Level4.tscn"
+			Global.levelNum = 4
 			var _target = get_tree().change_scene("res://Levels/Level4.tscn")
 		if name == "Exit_to_5":
 			Global.current_level = "Level5.tscn"
+			Global.levelNum = 5
 			var _target = get_tree().change_scene("res://Levels/Level5.tscn")
 		if name == "Exit_to_6":
 			Global.GameOverText = "Congratulations!\nYou win!"
 			var _target = get_tree().change_scene("res://Levels/Game_Over.tscn")
+		Global.jewelPositions = null

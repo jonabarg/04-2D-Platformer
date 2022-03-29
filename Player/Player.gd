@@ -92,4 +92,5 @@ func set_wall_raycasts(is_enabled):
 func die():
 	Global.lives -= 1
 	get_parent().remove_child(self)
+	Global.current_position = Vector2(200,200)
 

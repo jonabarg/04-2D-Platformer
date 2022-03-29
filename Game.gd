@@ -4,6 +4,7 @@ func _ready():
 	$Play.text = Global.playText
 
 func _on_Play_pressed():
+	Global.menu = false
 	var _target = get_tree().change_scene("res://Levels/" + str(Global.current_level))
 
 

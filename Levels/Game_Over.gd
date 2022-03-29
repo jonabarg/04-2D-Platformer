@@ -14,3 +14,4 @@ func _on_Quit_pressed():
 
 func _physics_process(_delta):
 	$Label.text = Global.GameOverText
+	$Label2.text = "Score: " + str(Global.jewels * Global.lives)

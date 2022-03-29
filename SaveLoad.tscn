@@ -47,10 +47,10 @@ __meta__ = {
 }
 
 [node name="Back" type="Button" parent="."]
-margin_left = 18.3292
-margin_top = 260.224
-margin_right = 102.329
-margin_bottom = 307.224
+margin_left = 19.0
+margin_top = 245.0
+margin_right = 103.0
+margin_bottom = 292.0
 text = "Back"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -121,6 +121,25 @@ text = "Delete"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="Label" parent="."]
+margin_left = 309.0
+margin_top = 44.0
+margin_right = 658.0
+margin_bottom = 194.0
+text = "You can save your game in any of these slots!
+Once you've saved your game in a slot, click it again
+any time to come back to the point you saved. You
+can also override any save slot with a new save, or 
+just delete it if you want to get rid of it! Once a save 
+is deleted, it's gone forever, so be careful!
+
+Also feel free to exit the game and come back later, as
+your saves will still be here!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="Slot1" to="." method="_on_Slot1_pressed"]
 [connection signal="pressed" from="Slot2" to="." method="_on_Slot2_pressed"]
 [connection signal="pressed" from="Slot3" to="." method="_on_Slot3_pressed"]
